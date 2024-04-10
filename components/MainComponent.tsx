@@ -22,6 +22,7 @@ import dynamic from "next/dynamic";
 import { useWindowSize } from "@/hooks/useWindowSize";
 
 import { FaFilePdf } from "react-icons/fa6";
+import Tiptap from "./TipTap";
 
 export default function MainComponent() {
   const [images, setImages] = useState<any>([]);
@@ -59,6 +60,7 @@ export default function MainComponent() {
     reprezentant_anb: formData.reprezentant_anb,
     data: formData.data,
     numar_fisa: formData.numar_fisa,
+    detalii: formData.detalii,
   };
 
   // PDF DOWNLOAD LINK FIX
@@ -75,10 +77,6 @@ export default function MainComponent() {
     }
   );
   // End of fix
-
-  useEffect(() => {
-    handleValidation();
-  }, [formData]);
 
   const handleResetareForumlar = () => {
     setFormData({
@@ -284,43 +282,10 @@ export default function MainComponent() {
 
   // Old Drop function (only png but not showing)
 
-  // function onDrop(e: any) {
-  //   e.preventDefault();
-  //   setIsDragging(false);
-  //   const files = e.dataTransfer.files;
-  //   for (let i = 0; i < files.length; i++) {
-  //     if (files[i].type.split("/")[0] !== "image") continue;
-  //     if (!images.some((e: any) => e.name === files[i].name)) {
-  //       new Compressor(files[i], {
-  //         quality: 0.8,
-  //         success: (result: any) => {
-  //           const reader = new FileReader();
-  //           console.log(reader);
-  //           reader.readAsDataURL(result);
-  //           reader.onload = () => {
-  //             // console.log("console log fain: " + reader.result);
-  //             setImages((prevImages: any) => [
-  //               ...prevImages,
-  //               {
-  //                 name: files[i].name,
-  //                 url: reader.result,
-  //               },
-  //             ]);
-  //           };
-  //         },
-  //       });
-  //     }
-  //   }
-  // }
-
-  // new ondrop only png works
-  // doesnt work well
-
   function onDrop(e: any) {
     e.preventDefault();
     setIsDragging(false);
-    const files = e.target.files;
-    if (files.length == 0) return;
+    const files = e.dataTransfer.files;
     for (let i = 0; i < files.length; i++) {
       if (files[i].type.split("/")[0] !== "image") continue;
       if (!images.some((e: any) => e.name === files[i].name)) {
@@ -328,6 +293,7 @@ export default function MainComponent() {
           quality: 0.8,
           success: (result: any) => {
             const reader = new FileReader();
+            console.log(reader);
             reader.readAsDataURL(result);
             reader.onload = () => {
               // console.log("console log fain: " + reader.result);
@@ -344,6 +310,48 @@ export default function MainComponent() {
       }
     }
   }
+
+  const handleContentChange = (newContent: any) => {
+    const descriere1 = newContent.slice(3);
+    const descriere2 = descriere1.slice(0, -4);
+    const descriere3 = descriere2.replace(/\r?\n|\r/g, "");
+    setFormData((prevState: any) => ({
+      ...prevState,
+      detalii: descriere3,
+    }));
+  };
+
+  // new ondrop only png works
+  // doesnt work well
+
+  // function onDrop(e: any) {
+  //   e.preventDefault();
+  //   setIsDragging(false);
+  //   const files = e.target.files;
+  //   if (files.length == 0) return;
+  //   for (let i = 0; i < files.length; i++) {
+  //     if (files[i].type.split("/")[0] !== "image") continue;
+  //     if (!images.some((e: any) => e.name === files[i].name)) {
+  //       new Compressor(files[i], {
+  //         quality: 0.8,
+  //         success: (result: any) => {
+  //           const reader = new FileReader();
+  //           reader.readAsDataURL(result);
+  //           reader.onload = () => {
+  //             // console.log("console log fain: " + reader.result);
+  //             setImages((prevImages: any) => [
+  //               ...prevImages,
+  //               {
+  //                 name: files[i].name,
+  //                 url: reader.result,
+  //               },
+  //             ]);
+  //           };
+  //         },
+  //       });
+  //     }
+  //   }
+  // }
 
   function selectFiles() {
     fileInputRef.current.click();
@@ -396,7 +404,7 @@ export default function MainComponent() {
                   className="text-gray-500 mb-2 font-bold "
                 >
                   <div className="flex justify-between">
-                    <p>Denumire Lucrare</p>
+                    <p>Titlu Constatare</p>
                     <span className="text-green-500 font-bold text-sm">
                       {" "}
                       *{" "}
@@ -413,8 +421,7 @@ export default function MainComponent() {
                   className="rounded-sm bg-gray-100 focus:outline-green-600 p-2 w-full "
                 />
               </div>
-
-              <div className="mt-4">
+              {/* <div className="mt-4">
                 <label
                   htmlFor="executant"
                   className="text-gray-500 mb-2 font-bold "
@@ -436,8 +443,8 @@ export default function MainComponent() {
                   placeholder="Executant"
                   className="rounded-sm bg-gray-100 focus:outline-green-600 p-2 w-full "
                 />
-              </div>
-
+              </div> */}
+              {/* 
               <div className="mt-4">
                 <label
                   htmlFor="reprezentant_anb"
@@ -460,7 +467,7 @@ export default function MainComponent() {
                   placeholder="Reprezentant ANB"
                   className="rounded-sm bg-gray-100 focus:outline-green-600 p-2 w-full "
                 />
-              </div>
+              </div> */}
               {/* Numar Fisa (aparent nu mai este nevoie de el asa ca il comentez)
               <div className="mt-4">
                 <label
@@ -481,7 +488,6 @@ export default function MainComponent() {
                   className="rounded-sm bg-gray-100 focus:outline-green-600 p-2 w-full"
                 />
               </div> */}
-
               <div className="mt-4">
                 <label htmlFor="data" className="text-gray-500 mb-2 font-bold ">
                   <div className="flex justify-between">
@@ -502,8 +508,7 @@ export default function MainComponent() {
                   className="rounded-sm bg-gray-100 focus:outline-green-600 p-2 w-full "
                 />
               </div>
-
-              <div className="mt-4">
+              {/* <div className="mt-4">
                 <label htmlFor="aria" className="text-gray-500 mb-2 font-bold ">
                   <div className="flex justify-between">
                     <p>Aria</p>
@@ -522,8 +527,7 @@ export default function MainComponent() {
                   placeholder="Aria"
                   className="rounded-sm bg-gray-100 focus:outline-green-600 p-2 w-full "
                 />
-              </div>
-
+              </div> */}
               <div className="mt-4">
                 <label htmlFor="zona" className="text-gray-500 mb-2 font-bold ">
                   <div className="flex justify-between">
@@ -544,7 +548,6 @@ export default function MainComponent() {
                   className="rounded-sm bg-gray-100 focus:outline-green-600 p-2 w-full "
                 />
               </div>
-
               {/* 
                 TIP ACTIVITATE
 
@@ -585,7 +588,6 @@ export default function MainComponent() {
                   </div>
                 </div>
               </div> */}
-
               {/*
                 LUCRARE FINALIZATA
 
@@ -626,7 +628,6 @@ export default function MainComponent() {
                   </div>
                 </div>
               </div> */}
-
               {/* 
                 // DESCRIERE
               <div className="mt-4">
@@ -653,30 +654,39 @@ export default function MainComponent() {
                 />
               </div> */}
 
-              {/* 
-              Detalii Descriere, i guess still nothing.
+              {/* Detalii Descriere, i guess still nothing. */}
+
               <div className="mt-4">
                 <label
                   htmlFor="detalii"
                   className="text-gray-500 mb-2 font-bold "
                 >
-                  Detalii Descriere
+                  Detalii Constatare
                 </label>
                 <textarea
                   id="detalii"
                   name="detalii"
                   value={formData.detalii}
                   onChange={(e: any) => updateForm(e)}
-                  placeholder="Detalii pentru generarea descrierii din fisa"
+                  placeholder="Detalii Constatare"
                   className="rounded-sm bg-gray-100 focus:outline-green-600 pl-2 pt-2 w-full h-[10rem]"
                 />
-              </div> */}
+              </div>
+              {/* <p className="text-gray-500 mb-1 font-bold mt-[1rem] ">
+                Detalii Constatare
+              </p>
+              <Tiptap
+                content={formData.detalii}
+                onChange={(newContent: string) =>
+                  handleContentChange(newContent)
+                }
+              /> */}
             </form>
             {/* DRAG AND DROP HERE */}
 
             <div className="CARD mt-4 overflow-hidden">
               <div className="flex justify-between items-center mb-2 ">
-                <h1 className="font-bold text-gray-500">Imagini Raport </h1>
+                <h1 className="font-bold text-gray-500">Imagini Constatare </h1>
                 <button
                   type="button"
                   className="bg-gray-300 flex disabled:bg-gray-500 disabled:hover:text-black p-2 hover:bg-red-800 text-black duration-100 hover:text-white rounded-xl"
@@ -759,9 +769,6 @@ export default function MainComponent() {
 
           <div className="2xl:w-1/2 w-full h-full mt-[2rem] flex flex-col">
             <div className="rezultat flex flex-col gap-2 mt-4">
-              <div className="flex justify-between w-full items-center">
-                <h1 className="text-gray-500 font-bold">Rezultat Descriere</h1>
-              </div>
               <div className="flex items-center justify-center w-full h-auto"></div>
 
               <div className="flex w-full items-center justify-center gap-2">
@@ -770,7 +777,7 @@ export default function MainComponent() {
                     <ConstatareSorin data={industrialeData} imagini={images} />
                   }
                   className="w-full"
-                  fileName={`${industrialeData.data} - Aria ${industrialeData.aria} - ${industrialeData.denumire_lucrare} ${industrialeData.zona} ${industrialeData.locaite_specifica}_FISA`.replaceAll(
+                  fileName={`CONSTATARE - ${industrialeData.data} - ${industrialeData.denumire_lucrare}, ${industrialeData.zona}`.replaceAll(
                     ".",
                     "/"
                   )}
@@ -813,17 +820,12 @@ export default function MainComponent() {
                     Constatare (Preview)
                   </h1>
                   <div className="w-full h-[60rem] md:block hidden bg-zinc-500">
-                    <PDFViewer
-                      height="100%"
-                      width="100%"
-                      showToolbar={true}
-                      children={
-                        <ConstatareSorin
-                          data={industrialeData}
-                          imagini={images}
-                        />
-                      }
-                    ></PDFViewer>
+                    <PDFViewer height="100%" width="100%" showToolbar={true}>
+                      <ConstatareSorin
+                        data={industrialeData}
+                        imagini={images}
+                      />
+                    </PDFViewer>
                   </div>
                 </>
               ) : (
