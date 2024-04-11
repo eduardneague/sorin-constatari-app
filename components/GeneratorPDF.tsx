@@ -15,6 +15,10 @@ interface ConstatareSorinProps {
   imagini: RaportImage[];
 }
 
+{
+  /* 2197 chactere */
+}
+
 const constatariSorin = StyleSheet.create({
   mainContainer: {
     display: "flex",
@@ -116,7 +120,7 @@ const constatariSorin = StyleSheet.create({
     fontStyle: "italic",
     fontSize: "10px",
     fontFamily: "Helvetica-Oblique",
-    opacity: 0.5,
+    opacity: 1,
   },
   lineContainer: {
     width: "100%",
@@ -141,81 +145,190 @@ const constatariSorin = StyleSheet.create({
     fontFamily: "Helvetica",
     lineHeight: "1.5px",
   },
+  greenText: {
+    color: "green",
+    fontSize: "11px",
+    fontFamily: "Helvetica-Bold",
+    opacity: 1,
+  },
 });
 
 export const ConstatareSorin = ({ data, imagini }: ConstatareSorinProps) => {
   // console.log(imagini); // check data
+  {
+    /* 2197 chactere */
+  }
+
   return (
     <>
       <Document>
-        <Page style={constatariSorin.pageBody} size="A4" wrap>
-          <View style={constatariSorin.mainContainer}>
-            <View style={constatariSorin.flexContainer}>
-              <View style={constatariSorin.verticalFlexContainer}>
-                <Text style={constatariSorin.mainTitle}>
-                  CONSTATARE MENTENANTA CLADIRI
-                </Text>
-                <Text style={constatariSorin.smallText}>
-                  DAMINA SOLUTIONS SRL
-                </Text>
-              </View>
-              <Image
-                src={{
-                  uri: "/DAMINA_LOGO.png",
-                  method: "GET",
-                  headers: { "Cache-Control": "no-cache" },
-                  body: "",
-                }}
-                style={constatariSorin.daminaLogo}
-              />
-            </View>
-
-            {/* <View style={constatariSorin.lineContainer}></View> */}
-
-            <View style={constatariSorin.flexContainer}>
-              <View style={constatariSorin.verticalFlexContainer}>
-                <Text style={constatariSorin.italicText}>{data.executant}</Text>
-                <Text style={constatariSorin.italicText}>
-                  {data.tip_activitate}
-                </Text>
-              </View>
-              <View style={constatariSorin.verticalFlexContainerRight}>
-                <Text style={constatariSorin.italicText}>
-                  Tel: +40 743 200 395
-                </Text>
-                <Text style={constatariSorin.italicText}>
-                  Email: management@damina.ro
-                </Text>
-              </View>
-            </View>
-
-            <View style={constatariSorin.lineContainer}></View>
-
-            <View style={constatariSorin.mainVerticalFlexContainer}>
-              <View style={constatariSorin.flexJustifyBetween}>
-                <Text style={constatariSorin.mainTitleBoxes}>
-                  Constatare:{" "}
-                  <Text style={constatariSorin.smallerText}>
-                    {data.denumire_lucrare}
+        {data.detalii.length <= 2197 ? (
+          <Page style={constatariSorin.pageBody} size="A4" wrap>
+            <View style={constatariSorin.mainContainer}>
+              <View style={constatariSorin.flexContainer}>
+                <View style={constatariSorin.verticalFlexContainer}>
+                  <Text style={constatariSorin.mainTitle}>
+                    {data.tip_activitate}
                   </Text>
-                </Text>
+                  <Text style={constatariSorin.smallText}>
+                    DAMINA SOLUTIONS SRL
+                  </Text>
+                </View>
+                <Image
+                  src={{
+                    uri: "/DAMINA_LOGO.png",
+                    method: "GET",
+                    headers: { "Cache-Control": "no-cache" },
+                    body: "",
+                  }}
+                  style={constatariSorin.daminaLogo}
+                />
+              </View>
+
+              {/* <View style={constatariSorin.lineContainer}></View> */}
+
+              <View style={constatariSorin.flexContainer}>
+                <View style={constatariSorin.verticalFlexContainer}>
+                  <Text style={constatariSorin.italicText}>
+                    <Text style={constatariSorin.greenText}>Responsabil: </Text>
+                    {data.executant}
+                  </Text>
+                </View>
+                <View style={constatariSorin.verticalFlexContainerRight}>
+                  <Text style={constatariSorin.italicText}>
+                    Tel: +40 743 200 395
+                  </Text>
+                  <Text style={constatariSorin.italicText}>
+                    Email: management@damina.ro
+                  </Text>
+                </View>
+              </View>
+
+              <View style={constatariSorin.lineContainer}></View>
+
+              <View style={constatariSorin.mainVerticalFlexContainer}>
+                <View style={constatariSorin.flexJustifyBetween}>
+                  <Text style={constatariSorin.mainTitleBoxes}>
+                    Constatare:{" "}
+                    <Text style={constatariSorin.smallerText}>
+                      {data.denumire_lucrare}
+                    </Text>
+                  </Text>
+                  <Text style={constatariSorin.mainTitleBoxes}>
+                    Data:{" "}
+                    <Text style={constatariSorin.smallerText}>{data.data}</Text>
+                  </Text>
+                </View>
                 <Text style={constatariSorin.mainTitleBoxes}>
-                  Data:{" "}
-                  <Text style={constatariSorin.smallerText}>{data.data}</Text>
+                  Zona:{" "}
+                  <Text style={constatariSorin.smallerText}>{data.zona}</Text>
+                </Text>
+
+                <Text style={constatariSorin.mainTitleBoxes}>
+                  Detalii Constatare:{" "}
+                </Text>
+                <Text style={constatariSorin.detaliiText}>
+                  {data.detalii.slice(0, 2197)}
                 </Text>
               </View>
-              <Text style={constatariSorin.mainTitleBoxes}>
-                Zona:{" "}
-                <Text style={constatariSorin.smallerText}>{data.zona}</Text>
-              </Text>
-
-              <Text style={constatariSorin.mainTitleBoxes}>
-                Detalii Constatare:{" "}
-              </Text>
-              <Text style={constatariSorin.detaliiText}>{data.detalii}</Text>
             </View>
-          </View>
-        </Page>
+          </Page>
+        ) : (
+          <>
+            <Page style={constatariSorin.pageBody} size="A4" wrap>
+              <View style={constatariSorin.mainContainer}>
+                <View style={constatariSorin.flexContainer}>
+                  <View style={constatariSorin.verticalFlexContainer}>
+                    <Text style={constatariSorin.mainTitle}>
+                      {data.tip_activitate}
+                    </Text>
+                    <Text style={constatariSorin.smallText}>
+                      DAMINA SOLUTIONS SRL
+                    </Text>
+                  </View>
+                  <Image
+                    src={{
+                      uri: "/DAMINA_LOGO.png",
+                      method: "GET",
+                      headers: { "Cache-Control": "no-cache" },
+                      body: "",
+                    }}
+                    style={constatariSorin.daminaLogo}
+                  />
+                </View>
+
+                {/* <View style={constatariSorin.lineContainer}></View> */}
+
+                <View style={constatariSorin.flexContainer}>
+                  <View style={constatariSorin.verticalFlexContainer}>
+                    <Text style={constatariSorin.italicText}>
+                      <Text style={constatariSorin.greenText}>
+                        Responsabil:{" "}
+                      </Text>
+                      {data.executant}
+                    </Text>
+                  </View>
+                  <View style={constatariSorin.verticalFlexContainerRight}>
+                    <Text style={constatariSorin.italicText}>
+                      Tel: +40 743 200 395
+                    </Text>
+                    <Text style={constatariSorin.italicText}>
+                      Email: management@damina.ro
+                    </Text>
+                  </View>
+                </View>
+
+                <View style={constatariSorin.lineContainer}></View>
+
+                <View style={constatariSorin.mainVerticalFlexContainer}>
+                  <View style={constatariSorin.flexJustifyBetween}>
+                    <Text style={constatariSorin.mainTitleBoxes}>
+                      Constatare:{" "}
+                      <Text style={constatariSorin.smallerText}>
+                        {data.denumire_lucrare}
+                      </Text>
+                    </Text>
+                    <Text style={constatariSorin.mainTitleBoxes}>
+                      Data:{" "}
+                      <Text style={constatariSorin.smallerText}>
+                        {data.data}
+                      </Text>
+                    </Text>
+                  </View>
+                  <Text style={constatariSorin.mainTitleBoxes}>
+                    Zona:{" "}
+                    <Text style={constatariSorin.smallerText}>{data.zona}</Text>
+                  </Text>
+
+                  <Text style={constatariSorin.mainTitleBoxes}>
+                    Detalii Constatare:{" "}
+                  </Text>
+                  <Text style={constatariSorin.detaliiText}>
+                    {data.detalii.slice(0, 2197)}
+                  </Text>
+                </View>
+              </View>
+            </Page>
+
+            {/* second page */}
+
+            <Page style={constatariSorin.pageBody} size="A4" wrap>
+              <View style={constatariSorin.mainContainer}>
+                {/* <View style={constatariSorin.lineContainer}></View> */}
+                <View style={constatariSorin.mainVerticalFlexContainer}>
+                  <Text style={constatariSorin.detaliiText}>
+                    {data.detalii.slice(2197, data.detalii.length)}
+                  </Text>
+                </View>
+              </View>
+            </Page>
+          </>
+        )}
+
+        {/* START NEW  */}
+
+        {/* END NEW */}
+
         {imagini.length <= 6 ? (
           <Page style={constatariSorin.pageBody} size="A4" wrap>
             <View style={constatariSorin.mainContainer}>
