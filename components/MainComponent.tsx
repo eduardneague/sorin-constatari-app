@@ -39,7 +39,7 @@ export default function MainComponent() {
     aria: "",
     zona: "",
     locatie_specifica: "",
-    executant: "Gabriel Balan",
+    executant: "",
     data: "",
     tip_activitate: null,
     reprezentant_anb: "Anton Ciometti",
@@ -421,13 +421,13 @@ export default function MainComponent() {
                   className="rounded-sm bg-gray-100 focus:outline-green-600 p-2 w-full "
                 />
               </div>
-              {/* <div className="mt-4">
+              <div className="mt-4">
                 <label
                   htmlFor="executant"
                   className="text-gray-500 mb-2 font-bold "
                 >
                   <div className="flex justify-between">
-                    <p>Executant</p>
+                    <p>Executant Constatare</p>
                     <span className="text-green-500 font-bold text-sm">
                       {" "}
                       *{" "}
@@ -443,7 +443,7 @@ export default function MainComponent() {
                   placeholder="Executant"
                   className="rounded-sm bg-gray-100 focus:outline-green-600 p-2 w-full "
                 />
-              </div> */}
+              </div>
               {/* 
               <div className="mt-4">
                 <label

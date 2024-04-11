@@ -174,9 +174,7 @@ export const ConstatareSorin = ({ data, imagini }: ConstatareSorinProps) => {
 
             <View style={constatariSorin.flexContainer}>
               <View style={constatariSorin.verticalFlexContainer}>
-                <Text style={constatariSorin.italicText}>
-                  Director Adjunct - Nitu Sorin Razvan
-                </Text>
+                <Text style={constatariSorin.italicText}>{data.executant}</Text>
                 <Text style={constatariSorin.italicText}>
                   Constatare Mentenanta Cladiri
                 </Text>
