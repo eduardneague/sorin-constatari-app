@@ -160,7 +160,6 @@ export const ConstatareSorin = ({ data, imagini }: ConstatareSorinProps) => {
                 </Text>
               </View>
               <Image
-            
                 src={{
                   uri: "/DAMINA_LOGO.png",
                   method: "GET",
@@ -219,31 +218,82 @@ export const ConstatareSorin = ({ data, imagini }: ConstatareSorinProps) => {
             </View>
           </View>
         </Page>
-
-        <Page style={constatariSorin.pageBody} size="A4" wrap>
-          <View style={constatariSorin.mainContainer}>
-            <Text style={constatariSorin.mainTitlePoze}>
-              Galerie Constatare
-            </Text>
-            <View style={constatariSorin.imageFlexBox}>
-              {imagini.map((img: any, i: any) => {
-                return (
-                  <Image
-
-                    key={i}
-                    src={{
-                      uri: img.url,
-                      method: "GET",
-                      headers: { "Cache-Control": "no-cache" },
-                      body: "",
-                    }}
-                    style={constatariSorin.displayedImage}
-                  />
-                );
-              })}
+        {imagini.length <= 6 ? (
+          <Page style={constatariSorin.pageBody} size="A4" wrap>
+            <View style={constatariSorin.mainContainer}>
+              <Text style={constatariSorin.mainTitlePoze}>
+                Galerie Constatare
+              </Text>
+              <View style={constatariSorin.imageFlexBox}>
+                {imagini.map((img: any, i: any) => {
+                  return (
+                    <Image
+                      key={i}
+                      src={{
+                        uri: img.url,
+                        method: "GET",
+                        headers: { "Cache-Control": "no-cache" },
+                        body: "",
+                      }}
+                      style={constatariSorin.displayedImage}
+                    />
+                  );
+                })}
+              </View>
             </View>
-          </View>
-        </Page>
+          </Page>
+        ) : (
+          <>
+            <Page style={constatariSorin.pageBody} size="A4" wrap>
+              <View style={constatariSorin.mainContainer}>
+                <Text style={constatariSorin.mainTitlePoze}>
+                  Galerie Constatare
+                </Text>
+                <View style={constatariSorin.imageFlexBox}>
+                  {imagini.map((img: any, i: any) => {
+                    if (i <= 5)
+                      return (
+                        <Image
+                          key={i}
+                          src={{
+                            uri: img.url,
+                            method: "GET",
+                            headers: { "Cache-Control": "no-cache" },
+                            body: "",
+                          }}
+                          style={constatariSorin.displayedImage}
+                        />
+                      );
+                  })}
+                </View>
+              </View>
+            </Page>
+            <Page style={constatariSorin.pageBody} size="A4" wrap>
+              <View style={constatariSorin.mainContainer}>
+                <Text style={constatariSorin.mainTitlePoze}>
+                  Galerie Constatare
+                </Text>
+                <View style={constatariSorin.imageFlexBox}>
+                  {imagini.map((img: any, i: any) => {
+                    if (i > 5 && i <= 11)
+                      return (
+                        <Image
+                          key={i}
+                          src={{
+                            uri: img.url,
+                            method: "GET",
+                            headers: { "Cache-Control": "no-cache" },
+                            body: "",
+                          }}
+                          style={constatariSorin.displayedImage}
+                        />
+                      );
+                  })}
+                </View>
+              </View>
+            </Page>
+          </>
+        )}
       </Document>
     </>
   );
