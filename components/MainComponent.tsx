@@ -39,9 +39,9 @@ export default function MainComponent() {
     aria: "",
     zona: "",
     locatie_specifica: "",
-    executant: "",
+    executant: "Nitu Sorin Razvan",
     data: "",
-    tip_activitate: null,
+    tip_activitate: "Constatare MCA",
     reprezentant_anb: "Anton Ciometti",
     status: null,
   });
@@ -421,6 +421,46 @@ export default function MainComponent() {
                   className="rounded-sm bg-gray-100 focus:outline-green-600 p-2 w-full "
                 />
               </div>
+              <div>
+                <label
+                  htmlFor="denumire_lucrare"
+                  className="text-gray-500 mb-2 font-bold "
+                >
+                  <div className="flex justify-between">
+                    <p>Titlu Constatare</p>
+                    <span className="text-green-500 font-bold text-sm">
+                      {" "}
+                      *{" "}
+                    </span>
+                  </div>
+                </label>
+                <select
+                  id="tip_activitate"
+                  name="tip_activitate"
+                  value={formData.tip_activitate}
+                  onChange={(e: any) => updateForm(e)}
+                  className="rounded-sm bg-gray-100 focus:outline-green-600 p-2 w-full "
+                >
+                  <option
+                    value="Constatare MCA
+"
+                  >
+                    Constatare MCA
+                  </option>
+                  <option
+                    value="Constatare DPA
+"
+                  >
+                    Constatare DPA
+                  </option>
+                  <option
+                    value="Constatare Tichet
+"
+                  >
+                    Constatare Tichet{" "}
+                  </option>
+                </select>
+              </div>
               <div className="mt-4">
                 <label
                   htmlFor="executant"
@@ -434,15 +474,26 @@ export default function MainComponent() {
                     </span>
                   </div>
                 </label>
-                <input
+                <select
                   id="executant"
-                  type="text"
                   name="executant"
                   value={formData.executant}
                   onChange={(e: any) => updateForm(e)}
-                  placeholder="Executant"
                   className="rounded-sm bg-gray-100 focus:outline-green-600 p-2 w-full "
-                />
+                >
+                  <option
+                    value="Nitu Sorin Razvan
+"
+                  >
+                    Nitu Sorin Razvan
+                  </option>
+                  <option
+                    value="Aurel Dumitrescu
+"
+                  >
+                    Aurel Dumitrescu{" "}
+                  </option>
+                </select>
               </div>
               {/* 
               <div className="mt-4">

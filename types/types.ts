@@ -39,11 +39,11 @@ export type IndustrialePDFData = {
     denumire_lucrare: string;
     aria: string;
     zona: string;
-    tip_activitate: "Corectiv" | "Preventiv" | null;
+    tip_activitate: "Constatare MCA" | "Constatare DPA" | "Constatare Tichet" | null;
     locaite_specifica: string;
     descriere: string;
     status: "DA" | "NU" | null;
-    executant: string;
+    executant: "Nitu Sorin Razvan" | "Dumitrescu Aurel" | null;
     reprezentant_anb: string;
     data: string;
     numar_fisa: string;

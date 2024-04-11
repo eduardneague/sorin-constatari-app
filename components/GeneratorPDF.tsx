@@ -176,7 +176,7 @@ export const ConstatareSorin = ({ data, imagini }: ConstatareSorinProps) => {
               <View style={constatariSorin.verticalFlexContainer}>
                 <Text style={constatariSorin.italicText}>{data.executant}</Text>
                 <Text style={constatariSorin.italicText}>
-                  Constatare Mentenanta Cladiri
+                  {data.tip_activitate}
                 </Text>
               </View>
               <View style={constatariSorin.verticalFlexContainerRight}>
@@ -184,7 +184,7 @@ export const ConstatareSorin = ({ data, imagini }: ConstatareSorinProps) => {
                   Tel: +40 743 200 395
                 </Text>
                 <Text style={constatariSorin.italicText}>
-                  Email: mentenantacladiri@damina.ro
+                  Email: management@damina.ro
                 </Text>
               </View>
             </View>
