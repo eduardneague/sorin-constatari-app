@@ -60,7 +60,7 @@ export default function MainComponent() {
     reprezentant_anb: formData.reprezentant_anb,
     data: formData.data,
     numar_fisa: formData.numar_fisa,
-    detalii: formData.detalii,
+    detalii: formData.detalii.normalize("NFD").replace(/[\u0300-\u036f]/g, ""), // Diacritics
   };
 
   // PDF DOWNLOAD LINK FIX
