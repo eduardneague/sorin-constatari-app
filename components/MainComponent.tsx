@@ -423,11 +423,11 @@ export default function MainComponent() {
               </div>
               <div>
                 <label
-                  htmlFor="denumire_lucrare"
+                  htmlFor="tip_constatare"
                   className="text-gray-500 mb-2 font-bold "
                 >
                   <div className="flex justify-between">
-                    <p>Titlu Constatare</p>
+                    <p>Tip Constatare</p>
                     <span className="text-green-500 font-bold text-sm">
                       {" "}
                       *{" "}
